@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Undangan — Aditya & Zulia</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* countdown */
+.countdown-card {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.count-box {
+    width: 70px;
+    height: 82px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.count-box span {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #000;
+    margin-bottom: 2px;
+}
+
+.count-box label {
+    font-size: 12px;
+    color: #444;
+}
+
+:root{
+  --bg1: #fff5f7;
+  --bg2: #ffeaf0;
+  --accent: #e75480;
+  --gold: #c89b58;
+  --muted: #666;
+  --card: rgba(255,255,255,0.96);
+  --maxw: 980px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Poppins", system-ui, -apple-system, Roboto, "Segoe UI", Arial;
+  background: linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
+
+.container{max-width:var(--maxw); margin:0 auto; padding:18px;}
+
+/* ---------- LOADER ---------- */
+#loader {
+  position:fixed; inset:0; z-index:99999;
+  display:flex; align-items:center; justify-content:center;
+  background: linear-gradient(180deg, #fff5f7, #ffe6ef); /* warna tema */
+  overflow:hidden;
+}
+.loader-card {
+  text-align:center; z-index:2;
+  padding:26px 22px; border-radius:14px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px); /* untuk Safari */
+  box-shadow:0 12px 40px rgba(200,155,88,0.25);
+}
+.loader-name{
+  font-family:'Dancing Script',cursive;
+  font-size:40px;
+  color:var(--gold);
+}
+.loader-sub{
+  color:#444;
+  margin-top:6px;
+  font-size:14px;
+}
+
+/* ---------- COVER ---------- */
+#cover {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  padding:20px;
+  background:url('https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0466.JPG') center/cover no-repeat;
+}
+#cover::after{ content:""; position:absolute; inset:0; background:rgba(0,0,0,0.52); }
+.cover-inner{position:relative; z-index:3; color:#fff;}
+.cover-undangan{ font-family:'Dancing Script',cursive; font-size:52px; margin:0; line-height:0.9}
+.cover-pernikahan{ font-family:'Poppins',sans-serif; font-size:20px; margin-top:6px; opacity:0.95}
+.cover-photo{ margin:20px auto 6px; width:170px; height:170px; border-radius:50%; overflow:hidden;
+border:3px solid rgba(255,255,255,0.9) }
+.cover-photo img{ width:100%; height:100%; object-fit:cover }
+.cover-names{ font-family:'Dancing Script',cursive; font-size:40px; margin-top:8px}
+.cover-to{ font-size:18px; margin-top:10px}
+
+/* ---------- MAIN CONTENT ---------- */
+#main{ display:none; padding-bottom:100px;}
+
+section.card{
+  max-width:920px; margin:28px auto;
+  background:var(--card);
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.04);
+  text-align:center; /* all center */
+}
+
+h2.section-title{
+  font-family:'Dancing Script',cursive;
+  color:var(--gold);
+  font-size:34px;
+  margin:0;
+  text-align:center;
+}
+.divider { width:100%; height:2px; background:var(--gold); margin:8px 0 18px 0; border-radius:6px }
+
+/* profile */
+.section-body{ color:#333; font-size:16px; line-height:1.5; }
+.profile-img{
+  width:100%; max-width:260px;
+  border-radius:12px;
+  margin:10px auto;
+  display:block;
+}
+
+/* gallery */
+.gallery{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
+.gallery img{
+  width:150px; height:150px; object-fit:cover;
+  border-radius:10px; cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08)
+}
+
+/* gift */
+.gift-box{
+  background:#fff; padding:16px; border-radius:10px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.05);
+  border-left:4px solid var(--gold);
+  margin-bottom:12px;
+  text-align:left;
+}
+
+/* toast */
+.toast{
+  position:fixed;
+  bottom:110px;   /* dinaikkan sedikit dari bawah */
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--gold);  /* warna gold coklat */
+  color:#fff;
+  padding:10px 16px;
+  border-radius:20px;
+  display:none;
+  z-index:9999;
+  font-weight:600;
+}
+
+/* music */
+#musicBtn{
+  position:fixed;
+  right:18px;
+  bottom:90px;   /* sebelumnya 18px → sekarang naik supaya tidak menutup navbar */
+  z-index:99999;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  border:0;
+  background:var(--gold);
+  color:#fff;
+  font-size:22px;
+  box-shadow:0 8px 30px rgba(200,155,88,0.26);
+  cursor:pointer;
+}
+
+/* bottom nav */
+.bottom-nav{
+  position:fixed; bottom:0; left:0; width:100%;
+  background:rgba(255,255,255,0.98);
+  border-top:1px solid #eee;
+  display:flex; justify-content:center; gap:8px;
+  padding:10px 6px; z-index:9999;
+}
+.bottom-nav a{ color:var(--gold); font-weight:700; text-decoration:none }
+
+/* lightbox */
+.lightbox{
+  position:fixed; inset:0; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.78);
+  z-index:2000; padding:20px;
+}
+.lightbox img{ max-width:96%; max-height:92%; border-radius:10px }
+
+/* responsive */
+@media (max-width:640px){
+  .cover-undangan{ font-size:40px }
+  .cover-names{ font-size:34px }
+  .gallery img{ width:48%; height:140px }
+}
+
+/* maps */
+#maps .section-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+    padding: 4px 0;
+}
+
+#maps .section-body img {
+    border-radius: 10px;
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+}
+
+#maps .section-body .btn-open {
+    margin-top: 0;
+    background: var(--gold);
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 24px;
+    border: 0;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+@media (max-width:480px){
+    #maps .section-body img {
+        width: 180px;
+        height: 180px;
+    }
+    #maps .section-body .btn-open {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- ========================================== -->
+<!-- ===============  LOADER  ================= -->
+<!-- ========================================== -->
+
+<div id="loader">
+  <div class="loader-card">
+      <div class="loader-name">Aditya & Zulia</div>
+      <div class="loader-sub">Sedang memuat undangan...</div>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- ================= COVER ================== -->
+<!-- ========================================== -->
+
+<section id="cover">
+  <div class="cover-inner">
+      <div class="cover-undangan">Undangan</div>
+      <div class="cover-pernikahan">Pernikahan</div>
+
+      <div class="cover-photo">
+        <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0466.JPG">
+      </div>
+
+      <div class="cover-names">Aditya & Zulia</div>
+
+      <div class="cover-to">Kepada Yth,<br><span id="namaTamu">Tamu Undangan</span></div>
+
+      <button class="btn-open" id="openBtn" style="margin-top:14px;background:var(--gold);color:#fff;padding:12px 28px;border-radius:28px;border:0;font-weight:700;cursor:pointer">
+        Buka Undangan
+      </button>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- ================= MAIN =================== -->
+<!-- ========================================== -->
+
+<main id="main" style="display:none">
+<div class="container">
+
+<!-- ========== PROFILE ========== -->
+<section id="profil" class="card">
+  <h2 class="section-title">Profil Mempelai</h2>
+  <div class="divider"></div>
+
+  <div class="section-body">
+    <!-- PEMBUKA UNDANGAN -->
+    <p style="font-size:16px; color:#333; line-height:1.6; margin-bottom:18px;">
+      <strong>Bismillahirrahmanirrahim</strong><br><br>
+      Assalamu’alaikum Warahmatullahi Wabarakatuh.<br><br>
+      Dengan hormat, tanpa mengurangi rasa hormat, izinkan kami menyampaikan undangan
+      atas acara pernikahan kami.
+    </p>
+    
+    <img class="profile-img" src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0466.JPG">
+
+    <p><strong>Aditya Nur Hakiki Eka Pramudita</strong></p>
+    <p style="font-size:14px;color:var(--muted)">Putra Pertama Dari Bapak Sutadi & Ibu Husnul Chotimah</p>
+
+    <div style="font-family:'Dancing Script',cursive;font-size:28px;margin:20px 0;color:#000">&amp;</div>
+
+    <p><strong>Zulia Eka Rusmia</strong></p>
+    <p style="font-size:14px;color:var(--muted)">Putri Pertama Dari Bapak Ruslan & Ibu Tarmi</p>
+  </div>
+</section>
+
+<!-- ========== EVENT ========== -->
+<section id="event" class="card">
+  <h2 class="section-title">Rangkaian Acara</h2>
+  <div class="divider"></div>
+
+  <div class="section-body">
+    <p><strong>Minggu, 21 Desember 2025</strong></p>
+    <p>Pukul <strong>12.30 - Selesai</strong></p>
+
+    <!-- TEMPAT -->
+    <p style="margin-top:18px">
+      <strong>Tempat :</strong><br>
+      Aula Majelis Taklim An Nur<br>
+      Jl. Ceger Gg. Mushola RT. 06/03, Pondok Aren
+    </p>
+  </div>
+
+	<!-- COUNTDOWN MODEL E -->
+<div class="countdown-card" style="margin-top:22px;">
+
+  <div class="count-box">
+      <span id="d">00</span>
+      <label>Hari</label>
+  </div>
+
+  <div class="count-box">
+      <span id="h">00</span>
+      <label>Jam</label>
+  </div>
+
+  <div class="count-box">
+      <span id="m">00</span>
+      <label>Menit</label>
+  </div>
+
+  <div class="count-box">
+      <span id="s">00</span>
+      <label>Detik</label>
+  </div>
+
+</div>
+
+</section>
+
+<!-- ========== MAPS ========== -->
+<section id="maps" class="card">
+  <h2 class="section-title">Lokasi</h2>
+  <div class="divider"></div>
+
+  <div class="section-body">
+
+    <!-- SUB JUDUL -->
+   <p style="font-size:21px; font-weight:700; color:var(--gold); margin:0px 0 0px 0;">
+ <strong>Scan Lokasi</strong>
+	</p>
+    
+    <!-- QR CODE -->
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://maps.app.goo.gl/vvY9TaDorqxrUrq56"
+  
+
+    <!-- TOMBOL BUKA MAPS -->
+    <a href="https://maps.app.goo.gl/vvY9TaDorqxrUrq56" target="_blank" rel="noopener noreferrer">
+  <button class="btn-open">
+    Buka di Maps
+  </button>
+</a>
+
+  </div>
+</section>
+
+<!-- ========== GALLERY ========== -->
+<section id="gallery" class="card">
+  <h2 class="section-title">Galeri</h2>
+  <div class="divider"></div>
+
+  <div class="section-body">
+    <div class="gallery">
+      <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0466.JPG" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0466.JPG">
+      <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0445.JPG" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0445.JPG">
+      <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0456.JPG" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/IMG_0456.JPG">
+    </div>
+  </div>
+</section>
+
+<!-- ========== THANKS ========== -->
+<section id="thanks" class="card">
+  <h2 class="section-title">Ucapan Terima Kasih</h2>
+  <div class="divider"></div>
+
+  <div class="section-body">
+    <p style="max-width:620px;margin:auto;line-height:1.6;">
+      Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir
+      dan memberikan doa restu. Terima kasih banyak.
+    </p>
+
+    <!-- JARAK / ENTER -->
+    <div style="height:18px;"></div>
+
+    <!-- SALAM PENUTUP -->
+    <p style="
+        font-size:15px;
+        color:#333;
+        text-align:center;
+        line-height:1.7;
+        margin:0;
+        padding:0 10px;">
+      <strong>Wassalamu’alaikum Warahmatullahi Wabarakatuh</strong><br>
+      Jazakumullahu Khairan atas doa dan kehadirannya.
+    </p>
+
+  </div>
+</section>
+
+</div>
+</main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg">
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast">Disalin ke clipboard</div>
+
+<!-- AUDIO -->
+<audio id="bgm" preload="auto" loop>
+  <source src="https://www.mfiles.co.uk/mp3-downloads/romantic-piano.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MUSIC BUTTON -->
+<button id="musicBtn">▶</button>
+
+<!-- BOTTOM NAV -->
+<div id="bottomNav" class="bottom-nav" style="display:none">
+  <a href="#profil">Profile</a> |
+  <a href="#event">Event</a> |
+  <a href="#maps">Maps</a> |
+  <a href="#gallery">Gallery</a> |
+  <a href="#thanks">Ucapan</a>
+</div>
+
+<textarea id="hiddenCopyArea" style="position:absolute;left:-9999px;top:-9999px;"></textarea>
+
+<script>
+/* -------------------- LOADER -------------------- */
+function spawnFlower(){
+  const f=document.createElement('div');
+  f.className='flower';
+  f.textContent=['🌸','🌺','💮','❀'][Math.floor(Math.random()*4)];
+  const size=12+Math.random()*28;
+  f.style.fontSize=size+'px';
+  f.style.left=Math.random()*100+'vw';
+  f.style.opacity=0.7;
+  document.body.appendChild(f);
+  let top=-10;
+  const spd=1+Math.random()*2;
+  const interval=setInterval(()=>{
+    top+=spd; f.style.top=top+'vh';
+    if(top>110){f.remove(); clearInterval(interval);}
+  },30);
+}
+
+const loader=document.getElementById('loader');
+const spawner=setInterval(spawnFlower,900);
+
+// loader auto-hide setelah 2.4 detik
+setTimeout(()=>{
+  loader.style.opacity=0;
+  requestAnimationFrame(()=> setTimeout(()=> loader.remove(),400));
+  clearInterval(spawner);
+},2400);
+
+/* -------------------- OPEN UNDANGAN -------------------- */
+const openBtn=document.getElementById('openBtn');
+openBtn.onclick=()=>{
+  console.log('Tombol Buka diklik');
+
+  // sembunyikan cover, tampilkan main
+  document.getElementById('cover').style.display='none';
+  document.getElementById('main').style.display='block';
+  document.getElementById('bottomNav').style.display='flex';
+  window.scrollTo(0,0);
+
+  // mainkan bgm, tapi aman di Safari
+  bgm.play().then(()=>{
+    musicBtn.innerText='⏸';
+  }).catch(err=>{
+    console.log('Autoplay gagal, tunggu user klik tombol ▶');
+    musicBtn.innerText='▶';
+  });
+};
+
+/* -------------------- MUSIC -------------------- */
+const musicBtn=document.getElementById('musicBtn');
+const bgm=document.getElementById('bgm');
+
+musicBtn.onclick=()=>{
+  if(bgm.paused){
+    bgm.play().then(()=> musicBtn.innerText='⏸').catch(()=> console.log('Play gagal'));
+  } else {
+    bgm.pause();
+    musicBtn.innerText='▶';
+  }
+};
+
+/* COPY */
+function copyRek(id){
+  const text=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text)
+    .then(()=>showToast("Nomor rekening disalin!"))
+    .catch(()=>{
+      const a=document.getElementById('hiddenCopyArea');
+      a.value=text; a.select();
+      document.execCommand('copy');
+      showToast("Nomor rekening disalin!");
+    });
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.innerText=msg; t.style.display='block';
+  setTimeout(()=> t.style.display='none',1800);
+}
+
+/* LIGHTBOX */
+document.querySelectorAll('.gallery img').forEach(img=>{
+  img.onclick=()=>{
+    document.getElementById('lightboxImg').src=img.dataset.large;
+    document.getElementById('lightbox').style.display='flex';
+    if(!bgm.paused){bgm.pause();musicBtn.innerText='▶'}
+  }
+});
+function closeLightbox(){
+  document.getElementById('lightbox').style.display='none';
+  document.getElementById('lightboxImg').src='';
+}
+
+/* COUNTDOWN */
+function runCountdown() {
+    const eventDate = new Date("2025-12-21T12:30:00+07:00").getTime();
+
+    const now = new Date().getTime();
+    const diff = eventDate - now;
+
+    if (diff <= 0) return;
+
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const s = Math.floor((diff % (1000*60)) / 1000);
+
+    document.getElementById("d").innerText = d;
+    document.getElementById("h").innerText = h.toString().padStart(2,'0');
+    document.getElementById("m").innerText = m.toString().padStart(2,'0');
+    document.getElementById("s").innerText = s.toString().padStart(2,'0');
+}
+
+setInterval(runCountdown, 1000);
+runCountdown();
+
+/*  NAMA TAMU OTOMATIS */
+function getNamaTamu() {
+  const params = new URLSearchParams(window.location.search);
+  const nama = params.get("nama");
+
+  if (nama && nama.trim() !== "") {
+    document.getElementById("namaTamu").innerText = decodeURIComponent(nama);
+  }
+}
+
+getNamaTamu();
+
+</script>
+
+</body>
+</html>
