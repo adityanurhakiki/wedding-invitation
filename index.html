@@ -192,15 +192,42 @@ h2.section-title{
   cursor:pointer;
 }
 
-/* bottom nav */
 .bottom-nav{
-  position:fixed; bottom:0; left:0; width:100%;
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
   background:rgba(255,255,255,0.98);
   border-top:1px solid #eee;
-  display:flex; justify-content:center; gap:8px;
-  padding:10px 6px; z-index:9999;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 4px;
+  z-index:9999;
 }
-.bottom-nav a{ color:var(--gold); font-weight:700; text-decoration:none }
+
+.bottom-nav a{
+  flex:1;
+  text-align:center;
+  color:var(--gold);
+  text-decoration:none;
+  font-weight:600;
+  font-size:11px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  white-space:nowrap;
+}
+
+.bottom-nav a span{
+  font-size:18px;
+  line-height:1;
+}
+
+.bottom-nav a small{
+  font-size:10px;
+}
 
 /* lightbox */
 .lightbox{
@@ -280,7 +307,7 @@ h2.section-title{
 <section id="cover">
   <div class="cover-inner">
       <div class="cover-undangan">Undangan</div>
-      <div class="cover-pernikahan">Pernikahan</div>
+      <div class="cover-pernikahan">Ngunduh Mantu</div>
 
       <div class="cover-photo">
         <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6372.jpeg">
@@ -311,11 +338,12 @@ h2.section-title{
   <div class="section-body">
     <!-- PEMBUKA UNDANGAN -->
     <p style="font-size:16px; color:#333; line-height:1.6; margin-bottom:18px;">
-      <strong>Bismillahirrahmanirrahim</strong><br><br>
-      Assalamu’alaikum Warahmatullahi Wabarakatuh.<br><br>
-      Dengan hormat, tanpa mengurangi rasa hormat, izinkan kami menyampaikan undangan
-      atas acara pernikahan anak kami.
-    </p>
+  <strong>Bismillahirrahmanirrahim</strong><br><br>
+  Assalamu’alaikum Warahmatullahi Wabarakatuh.<br><br>
+  Dengan hormat, tanpa mengurangi rasa hormat, kami bermaksud mengundang
+  Bapak/Ibu/Saudara/i untuk berkenan hadir dalam acara
+  <strong>Resepsi Ngunduh Mantu</strong> putra-putri kami.
+</p>
     
     <img class="profile-img" src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6379.jpeg">
 
@@ -326,6 +354,26 @@ h2.section-title{
 
     <p><strong>Zulia Eka Rusmia</strong></p>
     <p style="font-size:14px;color:var(--muted)">Putri Pertama Dari Bapak Ruslan & Ibu Tarmi</p>
+  </div>
+</section>
+
+<!-- ========== AKAD ========== -->
+<section id="akad" class="card">
+  <h2 class="section-title">Akad Nikah</h2>
+  <div class="divider"></div>
+
+  <div class="section-body">
+    <p style="font-style:italic; color:var(--muted); margin-bottom:14px;">
+      Telah dilaksanakan
+    </p>
+
+    <p><strong>Minggu, 07 Desember 2025</strong></p>
+    <p>Pukul <strong>08.00 WIB</strong></p>
+
+    <p style="margin-top:18px">
+      <strong>Bertempat di :</strong><br>
+      Jogorogo, Ngawi
+    </p>
   </div>
 </section>
 
@@ -409,6 +457,8 @@ h2.section-title{
       <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6373.jpeg" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6373.jpeg">
       <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6374.jpeg" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6374.jpeg">
       <img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6382.jpeg" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6382.jpeg">
+		<img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6432.jpeg" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6432.jpeg">
+		<img src="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6439.jpeg" data-large="https://raw.githubusercontent.com/adityanurhakiki/undangan-adit-zulia/refs/heads/main/YUR_6439.jpeg">
     </div>
   </div>
 </section>
@@ -461,13 +511,13 @@ h2.section-title{
 <!-- MUSIC BUTTON -->
 <button id="musicBtn">▶</button>
 
-<!-- BOTTOM NAV -->
 <div id="bottomNav" class="bottom-nav" style="display:none">
-  <a href="#profil">Profile</a> |
-  <a href="#event">Event</a> |
-  <a href="#maps">Maps</a> |
-  <a href="#gallery">Gallery</a> |
-  <a href="#thanks">Ucapan</a>
+  <a href="#profil"><span>👤</span><small>Profil</small></a>
+  <a href="#akad"><span>💍</span><small>Akad</small></a>
+  <a href="#event"><span>🎉</span><small>Resepsi</small></a>
+  <a href="#maps"><span>📍</span><small>Maps</small></a>
+  <a href="#gallery"><span>🖼️</span><small>Galeri</small></a>
+  <a href="#thanks"><span>💌</span><small>Ucapan</small></a>
 </div>
 
 <textarea id="hiddenCopyArea" style="position:absolute;left:-9999px;top:-9999px;"></textarea>
@@ -591,15 +641,22 @@ runCountdown();
 /*  NAMA TAMU OTOMATIS */
 function getNamaTamu() {
   const params = new URLSearchParams(window.location.search);
-  const nama = params.get("nama");
+  let nama = params.get("nama");
+
+  const elNama = document.getElementById("namaTamu");
+
+  // default
+  elNama.innerText = "Tamu Undangan";
 
   if (nama && nama.trim() !== "") {
-    document.getElementById("namaTamu").innerText = decodeURIComponent(nama);
+    nama = decodeURIComponent(nama).trim();
+
+    // tampilkan dengan sapaan
+    elNama.innerText = "Bpk/Ibu " + nama;
   }
 }
 
 getNamaTamu();
-
 </script>
 
 </body>
