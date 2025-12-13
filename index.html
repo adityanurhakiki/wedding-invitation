@@ -315,7 +315,11 @@ h2.section-title{
 
       <div class="cover-names">Aditya & Zulia</div>
 
-      <div class="cover-to">Kepada Yth,<br><span id="namaTamu">Tamu Undangan</span></div>
+      <div class="cover-to">
+  Kepada Yth,<br>
+  <strong>Bpk/Ibu</strong><br>
+  <span id="namaTamu">Tamu Undangan</span>
+</div>
 
       <button class="btn-open" id="openBtn" style="margin-top:14px;background:var(--gold);color:#fff;padding:12px 28px;border-radius:28px;border:0;font-weight:700;cursor:pointer">
         Buka Undangan
@@ -650,9 +654,7 @@ function getNamaTamu() {
 
   if (nama && nama.trim() !== "") {
     nama = decodeURIComponent(nama).trim();
-
-    // tampilkan dengan sapaan
-    elNama.innerText = "Bpk/Ibu " + nama;
+    elNama.innerText = nama;
   }
 }
 
