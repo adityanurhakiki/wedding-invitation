@@ -144,20 +144,10 @@ h2.section-title{
 }
 
 /* gallery */
-.gallery{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
+/* gallery */
+.gallery{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
 .gallery img{
-  flex: 0 0 calc(50% - 12px); /* 2 kolom HP */
-  max-width: calc(50% - 12px);
-  height: 150px;
-  object-fit: cover;
-  border-radius:10px;
-  margin:6px; /* pengganti gap */
-} object-fit:cover;
+  width:150px; height:150px; object-fit:cover;
   border-radius:10px; cursor:pointer;
   box-shadow:0 6px 18px rgba(0,0,0,0.08)
 }
