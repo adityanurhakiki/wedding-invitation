@@ -145,18 +145,18 @@ h2.section-title{
 
 /* gallery */
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:12px;
-  justify-items:center;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
 }
 
 .gallery img{
-  width:100%;
-  max-width:160px;
-  height:150px;
-  object-fit:cover;
+  flex: 0 0 calc(50% - 12px); /* 2 kolom HP */
+  max-width: calc(50% - 12px);
+  height: 150px;
+  object-fit: cover;
   border-radius:10px;
+  margin:6px; /* pengganti gap */
 }
 
 /* gift */
