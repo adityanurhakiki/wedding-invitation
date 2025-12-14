@@ -144,12 +144,29 @@ h2.section-title{
 }
 
 /* gallery */
-/* gallery */
-.gallery{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center }
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+}
+
 .gallery img{
-  width:150px; height:150px; object-fit:cover;
-  border-radius:10px; cursor:pointer;
-  box-shadow:0 6px 18px rgba(0,0,0,0.08)
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+@media (min-width:768px){
+  .gallery{
+    grid-template-columns:repeat(3, 1fr);
+  }
+
+  .gallery img{
+    height:auto;        /* supaya tidak ter-crop */
+    object-fit:contain;
+    background:#f6f6f6;
+  }
 }
 
 /* gift */
