@@ -144,35 +144,19 @@ h2.section-title{
 }
 
 /* gallery */
-/* ===== GALERI ===== */
 .gallery{
   display:grid;
   grid-template-columns:repeat(2, 1fr);
   gap:12px;
+  justify-items:center;
 }
 
-/* DEFAULT = HP */
 .gallery img{
   width:100%;
-  aspect-ratio:1 / 1;   /* PENTING: kotak di HP */
-  object-fit:cover;     /* rapi */
+  max-width:160px;
+  height:150px;
+  object-fit:cover;
   border-radius:10px;
-  cursor:pointer;
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
-}
-
-/* DESKTOP / LAPTOP */
-@media (min-width:768px){
-  .gallery{
-    grid-template-columns:repeat(3, 1fr);
-  }
-
-  .gallery img{
-    aspect-ratio:auto;  /* lepas rasio */
-    height:auto;
-    object-fit:contain; /* tampil utuh */
-    background:#f6f6f6;
-  }
 }
 
 /* gift */
